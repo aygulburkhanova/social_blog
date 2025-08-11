@@ -26,3 +26,31 @@ git commit -m "Название"
 git push
 ```
 
+
+
+
+
+Инициализируем Git в вашем проекте
+```commandline
+    git init
+```
+Подключим удалённый репозиторий
+```commandline
+    git remote add origin https://github.com/aygulburkhanova/social_blog.git
+```
+
+Теперь можно добавить файлы
+```commandline
+
+git add .
+```
+Создадим коммит
+```commandline
+git commit -m "Мой первый коммит с homework2"
+```
+
+Шаги для переименования ветки master в main локально:
+```commandline
+git branch -m master main
+
+```
