@@ -2,7 +2,7 @@ from django.db import models
 from app.models import TimeStampMixin
 from django.contrib.auth.models import User
 from tags.models import Tag
-
+from django.urls import reverse
 
 class Post(TimeStampMixin):
     """
@@ -34,22 +34,22 @@ class Post(TimeStampMixin):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь поста")
     tags = models.ManyToManyField(Tag, verbose_name="Тег")
-    likes = models.ManyToManyField(User, through="Like", related_name="post_likes")
-    dislikes = models.ManyToManyField(User, through="DisLike", related_name="post_dislikes")
+    likes = models.ManyToManyField(User, related_name="post_likes")
+    dislikes = models.ManyToManyField(User,  related_name="post_dislikes")
 
 
     def __str__(self):
         return f"{self.title} - {self.user} - {self.published_at}"
 
-    def get_likes(self):
-        pass
+    def get_likes_count(self):
+        return self.likes.count()
 
-    def get_dislikes(self):
-        pass
+    def get_dislikes_count(self):
+        return self.dislikes.count()
 
-
+    # Он генерирует ссылку для просмотра нашего обекта (обычно detail-траницу)
     def get_absolute_url(self):
-        pass
+        return reverse("post_detail", kwargs={"pk": self.pk})
 
 
 
@@ -84,38 +84,38 @@ class PostComment(TimeStampMixin):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Комментируемый пост")
 
 
-class Like(TimeStampMixin):
-    """
-    Лайки постов
-
-    Attributes:
-        created_at (model.DateTimeField): Дата создания лайка
-
-        user (User): пользователь поставивший лайк
-        post (Post): Пост
-    """
-
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Пост")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
-
-    class Meta:
-        unique_together = ("post", "user")
-
-
-class DisLike(TimeStampMixin):
-    """
-    DisLike постов
-
-    Attributes:
-         created_at (model.DateField) : Дата создания лайка
-
-         user (User) : пользователь создавший пост
-         post(Post): Пост
-    """
-
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Пост")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
-
-    class Meta:
-        unique_together = ("post", "user")
-
+# class Like(TimeStampMixin):
+#     """
+#     Лайки постов
+#
+#     Attributes:
+#         created_at (model.DateTimeField): Дата создания лайка
+#
+#         user (User): пользователь поставивший лайк
+#         post (Post): Пост
+#     """
+#
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Пост")
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
+#
+#     class Meta:
+#         unique_together = ("post", "user")
+#
+#
+# class DisLike(TimeStampMixin):
+#     """
+#     DisLike постов
+#
+#     Attributes:
+#          created_at (model.DateField) : Дата создания лайка
+#
+#          user (User) : пользователь создавший пост
+#          post(Post): Пост
+#     """
+#
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Пост")
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
+#
+#     class Meta:
+#         unique_together = ("post", "user")
+#

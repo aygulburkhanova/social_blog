@@ -1,7 +1,7 @@
 from django.db import models
 
 from app.models import TimeStampMixin
-
+from django.urls import reverse
 
 class Tag(TimeStampMixin):
     """"
@@ -18,4 +18,7 @@ class Tag(TimeStampMixin):
     title = models.CharField(max_length=255, verbose_name="Название тега")
     slug = models.SlugField(null=True, blank=True, verbose_name="Стог тега")
 
-
+    def __str__(self):
+        return self.title
+    def get_absolute_url(self):
+        return reverse("tag_detail", kwargs={"pk": self.pk})

@@ -1,7 +1,9 @@
+from audioop import reverse
+
 from django.db import models
 from app.models import TimeStampMixin
 from posts.models import User, Post
-
+from django.urls import reverse
 
 class Collection(TimeStampMixin):
     """"
@@ -19,6 +21,11 @@ class Collection(TimeStampMixin):
     name = models.CharField(max_length=100, blank=False, verbose_name=" Название коллекции")
     is_private = models.BooleanField(default=True, verbose_name="Приватная коллекция")
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец коллекции")
+
+    def __str__(self):
+        return f"{self.name} - {self.user.username}"
+    def get_absolute_url(self):
+        return reverse("collection_detail", kwargs={"pk": self.pk})
 
 
 class CollectionItems(TimeStampMixin):
