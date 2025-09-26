@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block main %}
+    <main class="main">
+        <!-- Баннер -->
+        <section class="banner">
+            <h1>Добро пожаловать в SocialBlog</h1>
+            <p>Делитесь мыслями, находите друзей и создавайте коллекции постов!</p>
+        </section>
+
+        <div class="content">
+            <!-- Лента постов -->
+            <section class="posts">
+                {% for post in posts %}
+                    {% include 'components/_post_card.html' %}
+                {% endfor %}
+            </section>
+
+            <!-- Боковая колонка -->
+            <aside class="sidebar">
+                <h3>Популярные теги</h3>
+                <div class="tag-list">
+                    {% for tag in tags %}
+                    <a href="{{ tag.get_absolute_url }}">#{{ tag.title }}</a>
+                    {% endfor %}
+                </div>
+
+                <h3>Популярные коллекции</h3>
+                
+                <ul>
+                    {% for item in collection_list %}
+                        <li><a href="{{ item.get_absolute_url }}"> {{ item.name }} </a></li>
+                    {% endfor %}
+
+                </ul>
+            </aside>
+        </div>
+    </main>
+{% endblock %}

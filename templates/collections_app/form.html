@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <main class="create-collection-page">
+        <h1>Создать коллекцию</h1>
+        <form class="collection-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Название -->
+            <label for="title">{{ form.name.label }}</label>
+            {{ form.name }}
+
+            <label for="title">{{ form.is_private.label }}</label>
+            {{ form.is_private }}
+
+            <!-- Кнопки -->
+            <div class="form-actions">
+                <button type="submit" class="save-btn">💾 Создать</button>
+                <button type="reset" class="cancel-btn">❌ Отмена</button>
+            </div>
+        </form>
+    </main>
+{% endblock %}

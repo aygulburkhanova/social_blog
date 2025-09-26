@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Создать/Редактировать пост | SocialBlog</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">SocialBlog</div>
+      <div class="menu" id="navMenu">
+        <a href="/">Посты</a>
+        <a href="/collections">Коллекции</a>
+        <a href="/create" class="active">Создать</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="create-post-page">
+    <h1>Создать пост</h1>
+    <form class="post-form" method="post" enctype="multipart/form-data">
+      
+      <!-- Заголовок -->
+      <label for="title">Заголовок</label>
+      <input type="text" id="title" name="title" placeholder="Введите заголовок..." required>
+
+      <!-- Содержимое -->
+      <label for="content">Текст поста</label>
+      <textarea id="content" name="content" rows="6" placeholder="Напишите что-то интересное..." required></textarea>
+
+      <!-- Теги -->
+      <label for="tags">Выберите теги</label>
+      <select id="tags" name="tags[]" multiple>
+        <option value="blog">#блог</option>
+        <option value="webdev">#webdev</option>
+        <option value="design">#дизайн</option>
+        <option value="life">#жизнь</option>
+        <option value="python">#python</option>
+        <option value="tech">#tech</option>
+      </select>
+      <small>Зажмите Ctrl (или Cmd на Mac), чтобы выбрать несколько</small>
+
+      <!-- Галерея -->
+      <label for="images">Изображения</label>
+      <input type="file" id="images" name="images" multiple accept="image/*">
+
+      <!-- Превью загруженных картинок -->
+      <div class="image-preview" id="imagePreview">
+        <p>Здесь будут превью загруженных изображений...</p>
+      </div>
+
+      <!-- Кнопки -->
+      <div class="form-actions">
+        <button type="submit" class="save-btn">💾 Сохранить</button>
+        <button type="reset" class="cancel-btn">❌ Отмена</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="logo">SocialBlog</div>
+      <p>© 2025 SocialBlog</p>
+    </div>
+  </footer>
+
+  <script>
+    const input = document.getElementById("images");
+    const preview = document.getElementById("imagePreview");
+
+    let filesArray = [];
+
+    input.addEventListener("change", () => {
+      filesArray = Array.from(input.files);
+      renderPreviews();
+    });
+
+    function renderPreviews() {
+      preview.innerHTML = "";
+      if (filesArray.length === 0) {
+        preview.innerHTML = "<p>Файлы не выбраны.</p>";
+        return;
+      }
+
+      filesArray.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const wrapper = document.createElement("div");
+          wrapper.classList.add("preview-item");
+
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.classList.add("preview-img");
+
+          const removeBtn = document.createElement("button");
+          removeBtn.innerHTML = "❌";
+          removeBtn.classList.add("remove-btn");
+          removeBtn.onclick = () => {
+            filesArray.splice(index, 1);
+            updateFileInput();
+            renderPreviews();
+          };
+
+          wrapper.appendChild(img);
+          wrapper.appendChild(removeBtn);
+          preview.appendChild(wrapper);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function updateFileInput() {
+      const dataTransfer = new DataTransfer();
+      filesArray.forEach(file => dataTransfer.items.add(file));
+      input.files = dataTransfer.files;
+    }
+  </script>
+</body>
+</html>

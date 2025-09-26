@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block main %}
+<main class="auth-page">
+    <div class="auth-card">
+      <h1>Редактировать профиль</h1>
+      <form class="auth-form" method="POST"  enctype="multipart/form-data">
+        <!-- CSRF в Django -->
+        {% csrf_token %} 
+        {{ form.as_p }}
+        <button type="submit" class="auth-btn">Сохранить изменения</button>
+      </form>
+
+      <div class="auth-links">
+        <a href="{% url "settings" %}">⬅ Назад в профиль</a>
+      </div>
+    </div>
+  </main>
+
+{% endblock main %}
+
+

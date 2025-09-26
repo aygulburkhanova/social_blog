@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <main class="create-post-page">
+        {% if object %}
+            <h1>Изменить Пост {{ object.title }}</h1>
+        {% else %}
+            <h1>Создать пост</h1>
+        {% endif %}
+
+        <form class="post-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Заголовок -->
+            <label for="title">{{ form.title.label }}</label>
+            {{ form.title }}
+            <!-- Содержимое -->
+            <label for="content">{{ form.description.label }}</label>
+            {{ form.description }}
+
+            <!-- Теги -->
+            <label for="tags">Выберите теги</label>
+            {{ form.tags }}
+            <small>Зажмите Ctrl (или Cmd на Mac), чтобы выбрать несколько</small>
+
+            <label for="">Статус</label>
+            {{ form.status }}
+
+            <!-- Галерея -->
+            <label for="images">Изображения</label>
+            {{ images.management_form }}
+            {% for image_form in images %}
+                {% if image_form.instance.pk %}
+                    <div class="image-preview" id="imagePreview">
+                        <img src="{{ image_form.instance.image.url }}" alt="" width="120px">
+                    </div>
+                {% endif %}
+                {{ image_form.as_p }}
+            {% endfor %}
+
+            <!-- Превью загруженных картинок -->
+            <div class="image-preview" id="imagePreview">
+                <p>Здесь будут превью загруженных изображений...</p>
+            </div>
+
+            <!-- Кнопки -->
+            <div class="form-actions">
+                <button type="submit" class="save-btn">💾 Сохранить</button>
+                <a href="{% url 'index' %}" class="cancel-btn">❌ Отмена</a>
+            </div>
+        </form>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const input = document.getElementById("images");
+        const preview = document.getElementById("imagePreview");
+
+        let filesArray = [];
+
+        input.addEventListener("change", () => {
+            filesArray = Array.from(input.files);
+            renderPreviews();
+        });
+
+        function renderPreviews() {
+            preview.innerHTML = "";
+            if (filesArray.length === 0) {
+                preview.innerHTML = "<p>Файлы не выбраны.</p>";
+                return;
+            }
+
+            filesArray.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const wrapper = document.createElement("div");
+                    wrapper.classList.add("preview-item");
+
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.classList.add("preview-img");
+
+                    const removeBtn = document.createElement("button");
+                    removeBtn.innerHTML = "❌";
+                    removeBtn.classList.add("remove-btn");
+                    removeBtn.onclick = () => {
+                        filesArray.splice(index, 1);
+                        updateFileInput();
+                        renderPreviews();
+                    };
+
+                    wrapper.appendChild(img);
+                    wrapper.appendChild(removeBtn);
+                    preview.appendChild(wrapper);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function updateFileInput() {
+            const dataTransfer = new DataTransfer();
+            filesArray.forEach(file => dataTransfer.items.add(file));
+            input.files = dataTransfer.files;
+        }
+    </script>
+{% endblock %}

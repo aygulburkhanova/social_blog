@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <main class="auth-page">
+        <div class="auth-card delete-confirm">
+            <h1>Удаление Коллекции</h1>
+            <p class="warning-text">
+                ⚠ Вы уверены, что хотите <b>безвозвратно удалить</b> свою коллекцию?
+                Все ваши лайки, комментарии и коллекции будут потеряны.
+            </p>
+
+            <form class="auth-form" method="post">
+                {% csrf_token %}
+                <button type="submit" class="delete-btn">Да, удалить коллекцию</button>
+            </form>
+
+            <div class="auth-links">
+                <a href="{% url 'collection_detail' object.pk %}" class="cancel-link">Отмена</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

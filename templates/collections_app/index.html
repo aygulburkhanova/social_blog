@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block main %}
+ <main class="collections-page">
+        <h1>Коллекции</h1>
+
+        <!-- Кнопка создания коллекции -->
+        <div class="create-collection">
+            <a href="{% url "collection_create" %}" class="create-btn">➕ Создать коллекцию</a>
+        </div>
+
+        <!-- Список коллекций -->
+        {% comment %} _collectioncard {% endcomment %}
+        {% include "components/_collection_card.html" %}
+
+    </main>
+
+{% endblock main %}
+

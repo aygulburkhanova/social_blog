@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль | SocialBlog</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">SocialBlog</div>
+      <div class="menu" id="navMenu">
+        <a href="/">Посты</a>
+        <a href="/collections">Коллекции</a>
+        <a href="/create">Создать</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="profile-page">
+    <!-- Инфо о пользователе -->
+    <section class="profile-header">
+      <img src="https://via.placeholder.com/120" alt="avatar" class="profile-avatar">
+      <div class="profile-info">
+        <h1>@User123</h1>
+        <p class="bio">Привет 👋 Я делюсь опытом о веб-разработке, Python и блогинге.</p>
+        <div class="profile-stats">
+          <span><b>12</b> постов</span>
+          <span><b>245</b> подписчиков</span>
+          <span><b>180</b> подписок</span>
+        </div>
+        <!-- Кнопка для чужого профиля -->
+        <button class="follow-btn">➕ Подписаться</button>
+        <!-- Если это свой профиль -->
+        <!-- <button class="edit-profile-btn">✏️ Редактировать профиль</button> -->
+      </div>
+    </section>
+
+    <!-- Посты пользователя -->
+    <section class="user-posts">
+      <h2>Посты</h2>
+      <div class="posts-grid">
+        <div class="post-card">
+          <img src="https://picsum.photos/400/200?random=1" alt="Post image">
+          <h3>Как я сделал свой первый блог</h3>
+          <p>Короткий текст поста...</p>
+          <div class="post-info">
+            <span>❤️ 12</span>
+            <span>👎 3</span>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <img src="https://picsum.photos/400/200?random=2" alt="Post image">
+          <h3>Советы по изучению Python</h3>
+          <p>Что стоит изучать новичку...</p>
+          <div class="post-info">
+            <span>❤️ 8</span>
+            <span>👎 1</span>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <img src="https://picsum.photos/400/200?random=3" alt="Post image">
+          <h3>10 идей для стартапа</h3>
+          <p>Интересные идеи, которые можно реализовать...</p>
+          <div class="post-info">
+            <span>❤️ 20</span>
+            <span>👎 4</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="logo">SocialBlog</div>
+      <p>© 2025 SocialBlog</p>
+    </div>
+  </footer>
+</body>
+</html>

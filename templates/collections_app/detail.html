@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+
+{% block main %}
+
+<div class="collection-detail">
+    <h1>{{ collection.name }}</h1>
+</div>
+
+<div class="posts-list">
+    {% for post in posts %}
+        <div class="post-card">
+            <a href="{{ post.get_absolute_url }}">
+                {% if post.get_first_image %}
+                    <img src="{{ post.get_first_image }}" alt="Post image">
+                {% else %}
+                    <img src="https://dom-dekor.ru/images/not-photo.png.webp" alt="Post image">
+                {% endif %}
+            </a>
+
+            <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+            <p>{{ post.description|truncatechars:100 }}</p>
+
+            <div class="post-info">
+                <span>Автор: {{ post.user.username }}</span>
+                <div class="reactions">
+                    <button class="like-btn">❤️ {{ post.get_likes_count }}</button>
+                    <button class="dislike-btn">👎 {{ post.get_dislikes_count }}</button>
+                </div>
+            </div>
+
+            <div class="tags">
+                {% for tag in post.tags.all %}
+                    <span>#{{ tag.title }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="actions">
+                {% if user.is_authenticated %}
+                    {% if collections %}
+                        <form action="{% url 'add_to_collection' post.id %}" method="post">
+                            {% csrf_token %}
+                            {{ collection_form.as_p }}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button type="submit" class="add-collection-btn">➕ Добавить в коллекцию</button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'collection_create' %}" class="add-collection-btn">➕ Создать коллекцию</a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'collection_create' %}" class="add-collection-btn">➕ Создать коллекцию</a>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <p>В этой коллекции пока нет постов.</p>
+    {% endfor %}
+</div>
+
+{% endblock main %}
+
+
+
+

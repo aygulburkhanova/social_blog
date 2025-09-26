@@ -1,0 +1,13 @@
+
+<div class="collections-list">
+   
+    {% for collection in collections %}
+    <div class="collection-card">
+        <h2>{{ collection.name }}</h2>
+        <p>{{ collection.get_count }} количество  </p>
+        <a href="{% url "collection_detail" collection.pk %}" class="view-btn">📂 Открыть</a>
+    </div>
+    {% endfor %}
+
+</div>
+

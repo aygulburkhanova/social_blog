@@ -1,0 +1,49 @@
+<header>
+    <nav class="navbar">
+        <div class="logo"> <a href="{% url "index" %}">SocialBlog </a> </div>
+
+        <!-- Бургер для мобильных -->
+        <div class="burger" id="burger">
+            ☰
+        </div>
+
+        <div class="menu" id="navMenu">
+            <a href="{% url 'post_list' %}">Посты</a>
+            <a href="{% url 'collection_list' %}">Коллекции</a>
+            <a href="{% url 'tag_list' %}">Теги</a>
+            <a href="{% url 'post_create' %}">Создать</a>
+        </div>
+
+        <div class="search">
+            <form action="{% url "post_list" %}" method="get">
+                <input type="text" placeholder="Поиск..." name="title", value="{{ request.GET.title }}">
+                <button type="submit">Поиск</button>
+            </form>
+        </div>
+        
+        {% if user.is_authenticated %}
+            <div class="profile" id="profileMenu">
+                {% if profile.profile.avatar %}
+                    <img src="{{ profile.profile.avatar.url }}" alt="" class="profile-avatar">
+                {% else %}
+                    <img src="https://cdn-icons-png.flaticon.com/512/4054/4054617.png" class="profile-avatar">
+                {% endif %}
+
+
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="{% url "profile" user.pk %}">Профиль</a>
+                    <a href="{% url "settings" %}">Настройки</a>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Выйти</button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <div class="auth-nav-links">
+                <a href="{% url 'login' %}" class="login-btn">Войти</a>
+                <a href="{% url 'register' %}" class="register-btn">Зарегистрироваться</a>
+            </div>
+        {% endif %}
+    </nav>
+</header>

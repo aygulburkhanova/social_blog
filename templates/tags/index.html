@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <main class="collections-page">
+        <h1>Теги</h1>
+        <div class="collections-list">
+            {% for tag in tags %}
+                {% include 'components/_tag_card.html' %}
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

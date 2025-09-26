@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block main %}
+  <main class="auth-page">
+    <div class="auth-card">
+      <h1>Регистрация</h1>
+      <form class="auth-form" method="post">
+        {% csrf_token %}
+        <label for="first_name">Имя</label>
+        {{ form.username }}
+
+        <label for="last_name">Фамилия</label>
+         {{ form.first_name }}
+
+        <label for="username">Имя пользователя</label>
+        {{ form.last_name }}
+
+        <label for="email">Email</label>
+         {{ form.email }}
+
+        <label for="password">Пароль</label>
+         {{ form.password1 }}
+
+        <label for="password2">Подтвердите пароль</label>
+        {{ form.password2 }}
+
+        <button type="submit" class="auth-btn">Зарегистрироваться</button>
+      </form>
+
+      <div class="auth-links">
+        <a href="/login">Уже есть аккаунт? Войти</a>
+      </div>
+    </div>
+  </main>
+
+{% endblock main %}
+
+
+
