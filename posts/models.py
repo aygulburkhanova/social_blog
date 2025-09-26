@@ -1,8 +1,11 @@
 from django.db import models
+from django.urls import reverse
+
 from app.models import TimeStampMixin
 from django.contrib.auth.models import User
+
 from tags.models import Tag
-from django.urls import reverse
+
 
 class Post(TimeStampMixin):
     """
@@ -23,7 +26,7 @@ class Post(TimeStampMixin):
        dislikes (ManyToManyField): Дизлайки поста
     """
     STATUS = {
-        "df": "Dtaft",
+        "df": "Draft",
         "pb": "Published"
     }
     title = models.CharField(max_length=255, verbose_name="Название поста")
@@ -32,11 +35,10 @@ class Post(TimeStampMixin):
     status = models.CharField(max_length=2, choices=STATUS, verbose_name="Статус публикации")
     published_at = models.DateTimeField(null=True, blank=True, verbose_name="Дата публикации")
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь поста")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts", verbose_name="Пользователь поста")
     tags = models.ManyToManyField(Tag, verbose_name="Тег")
-    likes = models.ManyToManyField(User, related_name="post_likes")
-    dislikes = models.ManyToManyField(User,  related_name="post_dislikes")
-
+    likes = models.ManyToManyField(User, related_name="likes")
+    dislikes = models.ManyToManyField(User, related_name="dislikes")
 
     def __str__(self):
         return f"{self.title} - {self.user} - {self.published_at}"
@@ -47,7 +49,13 @@ class Post(TimeStampMixin):
     def get_dislikes_count(self):
         return self.dislikes.count()
 
-    # Он генерирует ссылку для просмотра нашего обекта (обычно detail-траницу)
+    def get_first_image(self):
+        if self.images.all():
+            return self.images.all()[0].image.url
+        return None
+
+
+    # Он генерирует ссылку для просмотра нашего обьекта (обычно detail-страницу)
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"pk": self.pk})
 
@@ -65,7 +73,6 @@ class PostImage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images", verbose_name="Пост")
 
 
-
 class PostComment(TimeStampMixin):
     """"
     Коментария нашего поста
@@ -81,41 +88,4 @@ class PostComment(TimeStampMixin):
     body = models.TextField(blank=False, verbose_name="Текст комментария")
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор комментария")
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Комментируемый пост")
-
-
-# class Like(TimeStampMixin):
-#     """
-#     Лайки постов
-#
-#     Attributes:
-#         created_at (model.DateTimeField): Дата создания лайка
-#
-#         user (User): пользователь поставивший лайк
-#         post (Post): Пост
-#     """
-#
-#     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Пост")
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
-#
-#     class Meta:
-#         unique_together = ("post", "user")
-#
-#
-# class DisLike(TimeStampMixin):
-#     """
-#     DisLike постов
-#
-#     Attributes:
-#          created_at (model.DateField) : Дата создания лайка
-#
-#          user (User) : пользователь создавший пост
-#          post(Post): Пост
-#     """
-#
-#     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Пост")
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
-#
-#     class Meta:
-#         unique_together = ("post", "user")
-#
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments" ,verbose_name="Комментируемый пост")

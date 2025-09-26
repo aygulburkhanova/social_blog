@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <main class="post-page">
+        <article class="post">
+
+            <h1 class="post-title">{{ post.title }}</h1>
+            <div class="post-meta">
+                <span>Автор: <b>{{ post.user.username }}</b></span>
+                <span>  {{ posts.published_at|date:"d E Y" }}</span>
+            </div>
+            <div class="post-tags">
+                {% for tag in posts.tags.all %}
+                    <a href="#">#{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+
+            <div class="post-gallery">
+
+                <div class="main-image">
+                    {% if post.get_first_image %}
+                        <img src="{{ post.get_first_image }}" alt="">
+                    {% else %}
+                        <img src="https://dom-dekor.ru/images/not-photo.png.webp" alt="Post image">
+                    {% endif %}
+
+                </div>
+                {% if post.images.count >= 1 %}
+                    <div class="thumbnails">
+                        {% for image in post.images.all %}
+                            <img src="{{ image.image.url }}" alt="{{ image.id }}">
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="post-content">
+                <p>{{ posts.description }}</p>
+            </div>
+
+            <div class="post-reactions">
+                <form action="{% url 'like_post' post.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="like-btn" type="submit">❤️ {{ post.get_likes_count }}</button>
+                </form>
+                <form action="{% url 'dislike_post' post.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="dislike-btn">👎 {{ post.get_dislikes_count }}</button>
+                </form>
+            </div>
+
+            <div class="post-actions">
+                 {% if user.is_authenticated %}
+            {% if collections %}
+                <form action="{% url 'add_to_collection' post.id %}" method="post">
+                    {% csrf_token %}
+                    {{ collection_form.as_p }}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button type="submit" class="add-collection-btn">➕ Добавить в коллекцию</button>
+                </form>
+            {% else %}
+                <a href="{% url 'collection_create' %}" class="add-collection-btn">➕ Создать коллекцию</a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'collection_create' %}" class="add-collection-btn">➕ Создать коллекцию</a>
+        {% endif %}
+                {% if post.user == request.user %}
+                    <form action="{% url 'post_update' post.id %}" method="get">
+                        <button class="edit-post-btn">✏️ Редактировать</button>
+                    </form>
+                    <form action="{% url 'post_delete' post.id %}" method="get">
+                        <button class="delete-post-btn">🗑 Удалить</button>
+                    </form>
+
+                {% endif %}
+            </div>
+
+        </article>
+
+        <!-- Комментарии -->
+        <section class="comments">
+            <h2>Комментарии</h2>
+            {% for comment in comments %}
+                {% include 'components/_comment_card.html' %}
+            {% endfor %}
+            <form class="comment-form" method="post" action="{% url 'add_comment' post.id %}">
+                {% csrf_token %}
+                {{ comment_form.body }}
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
+
+    </main>
+{% endblock main %}
+

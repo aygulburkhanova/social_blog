@@ -1,12 +1,18 @@
 """
-Наш основной машрутизатор
+Нащ Основной Маршрутизатор
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf.urls.static import static
+from django.conf import settings
 urlpatterns = [
-    path('admin/', admin.site.urls), #Путь до Админ панель
-    path('', include("app.urls"))
+    path('admin/', admin.site.urls),  # Путь До Админ Панели
+    path('', include("app.urls")),
+    path('accounts/', include("accounts.urls")),
+    path('posts/', include("posts.urls")),
+    path('tags/', include("tags.urls")),
+    path('collections/', include("collections_app.urls")),
 ]
-
-
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

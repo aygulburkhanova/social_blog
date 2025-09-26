@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Создать коллекцию | SocialBlog</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">SocialBlog</div>
+      <div class="menu" id="navMenu">
+        <a href="/">Посты</a>
+        <a href="/collections" class="active">Коллекции</a>
+        <a href="/create">Создать пост</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="create-collection-page">
+    <h1>Создать коллекцию</h1>
+    <form class="collection-form" method="post" enctype="multipart/form-data">
+
+      <!-- Название -->
+      <label for="title">Название коллекции</label>
+      <input type="text" id="title" name="title" placeholder="Введите название..." required>
+
+      <!-- Описание -->
+      <label for="description">Описание</label>
+      <textarea id="description" name="description" rows="4" placeholder="Краткое описание коллекции..."></textarea>
+
+      <!-- Обложка -->
+      <label for="cover">Обложка</label>
+      <input type="file" id="cover" name="cover" accept="image/*">
+      <div class="cover-preview" id="coverPreview"></div>
+
+
+      <!-- Кнопки -->
+      <div class="form-actions">
+        <button type="submit" class="save-btn">💾 Создать</button>
+        <button type="reset" class="cancel-btn">❌ Отмена</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="logo">SocialBlog</div>
+      <p>© 2025 SocialBlog</p>
+    </div>
+  </footer>
+
+  <script>
+    // превью для обложки
+    const coverInput = document.getElementById("cover");
+    const coverPreview = document.getElementById("coverPreview");
+
+    coverInput.addEventListener("change", () => {
+      coverPreview.innerHTML = "";
+      const file = coverInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.classList.add("cover-img");
+          coverPreview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>

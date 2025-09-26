@@ -1,0 +1,5 @@
+<div class="collection-card">
+    <h2>#{{ tag.title }}</h2>
+    <p>{{ tag.get_count }} постов</p>
+    <a href="{% url 'tag_detail' tag.pk %}" class="view-btn">📂 Открыть</a>
+</div>

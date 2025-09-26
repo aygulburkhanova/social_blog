@@ -1,53 +1,42 @@
 from django.contrib import admin
-from posts.models import Post, PostImage
 
+from posts.models import Post, PostImage
 
 
 class PostImageInline(admin.StackedInline):
     model = PostImage
-    extra = 3
+    extra = 0
     min_num = 0
     max_num = 3
 
+
 @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    # Помогает в Списке какие поля для показа
-    list_display = ["title", "status", "published_at", "user", "view_like_count", "view_dislike_count", "view_comment_count"]
-    exclude = ["published_at"]  # Убирает с формы в админке поля которое не нужно
-
-
-    # какие поля можно изменять в списке
+class PostModelAdmin(admin.ModelAdmin):
+    # Помогает в Списке Показывать какие нужны для показа
+    list_display = [
+        "title", "status", "user", "published_at", "view_like_count", "view_dislike_count", "view_comment_count"
+    ]
+    # Убирает с Формы в Админке Поле которое не нужно
+    exclude = ["published_at", "likes", "dislikes"]
+    # Какие поля можно изменять в Списки
     list_editable = ["status"]
-
-
-    # По каким полям должна быть фильтрация
+    # По каким Полям должна быть фильтрация
     list_filter = ["created_at"]
-
     # Поиск
     search_fields = ["title"]
-
     # Пагинация
     list_per_page = 20
-    # Инлайн моделки
+    # Инлайн Модельки
     inlines = [PostImageInline]
-
-
-
-
-
-    # если не добавит obj выйдет ошибка
 
     @admin.display(description="Лайки")
     def view_like_count(self, obj: Post):
         return 0
 
-    @admin.display(description="Дизлайки")
+    @admin.display(description="ДизЛайки")
     def view_dislike_count(self, obj: Post):
         return 0
 
-    @admin.display(description="Клмменты")
+    @admin.display(description="Комменты")
     def view_comment_count(self, obj: Post):
         return 0
-
-
-

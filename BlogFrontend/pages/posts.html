@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Посты | SocialBlog</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">SocialBlog</div>
+        <nav class="menu">
+            <a href="/">Главная</a>
+            <a href="/collections.html">Коллекции</a>
+            <a href="/profile.html">Профиль</a>
+        </nav>
+    </header>
+
+    <!-- Заголовок -->
+    <main class="posts-page">
+        <h1 id="page-title">Все посты</h1>
+        <form class="filters" method="get" action="">
+            <div class="filter-group">
+                <label for="tag">Тег:</label>
+                <select id="tag" name="tag">
+                    <option value="">Все</option>
+                    <option value="webdev">#webdev</option>
+                    <option value="javascript">#javascript</option>
+                    <option value="css">#css</option>
+                    <option value="frontend">#frontend</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="sort">Сортировать:</label>
+                <select id="sort" name="sort">
+                    <option value="new">Новые</option>
+                    <option value="popular">Популярные</option>
+                    <option value="comments">Обсуждаемые</option>
+                </select>
+            </div>
+
+            <button type="submit" class="filter-btn">Применить</button>
+        </form>
+        <!-- Список постов -->
+        <div class="posts-list">
+
+            <div class="post-card">
+                <img src="https://via.placeholder.com/400x200" alt="Post image">
+                <h2>Второй пост</h2>
+                <p>Пример карточки с другим текстом и тегами...</p>
+                <div class="post-info">
+                    <span>Автор: User123</span>
+                    <div class="reactions">
+                        <button class="like-btn">❤️ 12</button>
+                        <button class="dislike-btn">👎 3</button>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span>#tech</span>
+                    <span>#coding</span>
+                </div>
+                <div class="actions">
+                    <button class="add-collection-btn">➕ Добавить в коллекцию</button>
+                </div>
+            </div>
+
+           <div class="post-card">
+                <img src="https://via.placeholder.com/400x200" alt="Post image">
+                <h2>Второй пост</h2>
+                <p>Пример карточки с другим текстом и тегами...</p>
+                <div class="post-info">
+                    <span>Автор: User123</span>
+                    <div class="reactions">
+                        <button class="like-btn">❤️ 12</button>
+                        <button class="dislike-btn">👎 3</button>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span>#tech</span>
+                    <span>#coding</span>
+                </div>
+                <div class="actions">
+                    <button class="add-collection-btn">➕ Добавить в коллекцию</button>
+                </div>
+            </div>
+           <div class="post-card">
+                <img src="https://via.placeholder.com/400x200" alt="Post image">
+                <h2>Второй пост</h2>
+                <p>Пример карточки с другим текстом и тегами...</p>
+                <div class="post-info">
+                    <span>Автор: User123</span>
+                    <div class="reactions">
+                        <button class="like-btn">❤️ 12</button>
+                        <button class="dislike-btn">👎 3</button>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span>#tech</span>
+                    <span>#coding</span>
+                </div>
+                <div class="actions">
+                    <button class="add-collection-btn">➕ Добавить в коллекцию</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="logo">SocialBlog</div>
+                <p>Место для идей и общения.</p>
+            </div>
+            <div class="footer-menu">
+                <a href="/">Посты</a>
+                <a href="/collections.html">Коллекции</a>
+                <a href="/create.html">Создать</a>
+                <a href="/about.html">О проекте</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 SocialBlog. Все права защищены.
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

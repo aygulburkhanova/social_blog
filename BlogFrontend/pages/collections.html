@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Social Blog</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">SocialBlog</div>
+
+            <!-- Бургер для мобильных -->
+            <div class="burger" id="burger">
+                ☰
+            </div>
+
+            <div class="menu" id="navMenu">
+                <a href="/">Посты</a>
+                <a href="/collections">Коллекции</a>
+                <a href="/create">Создать</a>
+            </div>
+
+            <div class="search">
+                <input type="text" placeholder="Поиск...">
+            </div>
+
+            <div class="profile" id="profileMenu">
+                <img src="https://via.placeholder.com/35" alt="avatar">
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="/profile">Профиль</a>
+                    <a href="/settings">Настройки</a>
+                    <a href="/logout">Выйти</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="collections-page">
+        <h1>Коллекции пользователя: User123</h1>
+
+        <!-- Кнопка создания коллекции -->
+        <div class="create-collection">
+            <button class="create-btn">➕ Создать коллекцию</button>
+        </div>
+
+        <!-- Список коллекций -->
+        <div class="collections-list">
+            <div class="collection-card">
+                <h2>Любимые статьи</h2>
+                <p>5 постов</p>
+                <button class="view-btn">📂 Открыть</button>
+            </div>
+
+            <div class="collection-card">
+                <h2>По фронтенду</h2>
+                <p>8 постов</p>
+                <button class="view-btn">📂 Открыть</button>
+            </div>
+
+            <div class="collection-card">
+                <h2>Идеи для проекта</h2>
+                <p>3 поста</p>
+                <button class="view-btn">📂 Открыть</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="logo">SocialBlog</div>
+                <p>Место для идей и общения.</p>
+            </div>
+
+            <div class="footer-menu">
+                <a href="/">Посты</a>
+                <a href="/collections">Коллекции</a>
+                <a href="/create">Создать</a>
+                <a href="/about">О проекте</a>
+            </div>
+
+            <div class="footer-social">
+                <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg"
+                        alt="GitHub"></a>
+                <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg"
+                        alt="Telegram"></a>
+                <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
+                        alt="YouTube"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 SocialBlog. Все права защищены.
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

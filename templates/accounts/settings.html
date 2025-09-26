@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block main %}
+ <main class="collections-page">
+        <h1>Настройки</h1>
+
+        <!-- Кнопка создания коллекции -->
+        <div class="create-collection">
+            <a href="{% url 'collection_create' %}" class="create-btn">➕ Создать коллекцию</a>
+        </div>
+
+        <!-- Список коллекций -->
+       <div class="collections-list">
+            <div class="collection-card">
+                <h2>Изменение Профиля</h2>
+                <a href="{% url 'profile_update' pk=user.pk %}" class="view-btn">Открыть</a>
+            </div>
+            <div class="collection-card">
+                <h2>Изменение Персональной Информации</h2>
+                <a href="{% url 'user_update' pk=user.pk %}" class="view-btn">Открыть</a>
+            </div>
+            <div class="collection-card">
+                <h2>Изменение Пароля</h2>
+                <a href="{% url 'password_change' %}" class="view-btn">Открыть</a>
+            </div>
+        </div>
+
+
+
+
+    </main>
+
+
+
+
+{% endblock main %}
+
+
+
+
+

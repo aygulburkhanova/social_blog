@@ -1,9 +1,9 @@
-from audioop import reverse
-
 from django.db import models
+from django.urls import reverse
+
 from app.models import TimeStampMixin
 from posts.models import User, Post
-from django.urls import reverse
+
 
 class Collection(TimeStampMixin):
     """"
@@ -24,6 +24,10 @@ class Collection(TimeStampMixin):
 
     def __str__(self):
         return f"{self.name} - {self.user.username}"
+
+    def get_count(self):
+        return self.collection_items.count()
+
     def get_absolute_url(self):
         return reverse("collection_detail", kwargs={"pk": self.pk})
 
@@ -35,7 +39,7 @@ class CollectionItems(TimeStampMixin):
     Attributes:
         created_at (model.DateField) : Дата создания избранного
         updated_at (model.DateField) : Дата обновления избранного
-        collections (Collection): Колекуия к которому она пренадлежит
+        collection (Collection): Колекуия к которому она пренадлежит
 
         user(User): Пользователь создавший колекцию
         post(Post): Пост
@@ -44,6 +48,8 @@ class CollectionItems(TimeStampMixin):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Добавивший пользователь")
     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Добавленный пост")
-    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, verbose_name="Коллекция")
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, related_name="collection_items",
+                                   verbose_name="Коллекция")
 
-
+    class Meta:
+        unique_together = ("user", "post", "collection")

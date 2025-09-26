@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Social Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">SocialBlog</div>
+
+            <!-- Бургер для мобильных -->
+            <div class="burger" id="burger">
+                ☰
+            </div>
+
+            <div class="menu" id="navMenu">
+                <a href="/">Посты</a>
+                <a href="/collections">Коллекции</a>
+                <a href="/create">Создать</a>
+            </div>
+
+            <div class="search">
+                <input type="text" placeholder="Поиск...">
+            </div>
+
+            <div class="profile" id="profileMenu">
+                <img src="https://via.placeholder.com/35" alt="avatar">
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="/profile">Профиль</a>
+                    <a href="/settings">Настройки</a>
+                    <a href="/logout">Выйти</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- Баннер -->
+        <section class="banner">
+            <h1>Добро пожаловать в SocialBlog</h1>
+            <p>Делитесь мыслями, находите друзей и создавайте коллекции постов!</p>
+        </section>
+
+        <div class="content">
+            <!-- Лента постов -->
+            <section class="posts">
+                <div class="post-card">
+                    <img src="https://via.placeholder.com/400x200" alt="Post image">
+                    <h2>Второй пост</h2>
+                    <p>Пример карточки с другим текстом и тегами...</p>
+                    <div class="post-info">
+                        <span>Автор: User123</span>
+                        <div class="reactions">
+                            <button class="like-btn">❤️ 12</button>
+                            <button class="dislike-btn">👎 3</button>
+                        </div>
+                    </div>
+                    <div class="tags">
+                        <span>#tech</span>
+                        <span>#coding</span>
+                    </div>
+                    <div class="actions">
+                        <button class="add-collection-btn">➕ Добавить в коллекцию</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Боковая колонка -->
+            <aside class="sidebar">
+                <h3>Популярные теги</h3>
+                <div class="tag-list">
+                    <a href="#">#travel</a>
+                    <a href="#">#coding</a>
+                    <a href="#">#music</a>
+                    <a href="#">#life</a>
+                </div>
+
+                <h3>Популярные коллекции</h3>
+                <ul>
+                    <li><a href="#">Путешествия</a></li>
+                    <li><a href="#">Frontend</a></li>
+                    <li><a href="#">Мемы</a></li>
+                </ul>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="logo">SocialBlog</div>
+                <p>Место для идей и общения.</p>
+            </div>
+
+            <div class="footer-menu">
+                <a href="/">Посты</a>
+                <a href="/collections">Коллекции</a>
+                <a href="/create">Создать</a>
+                <a href="/about">О проекте</a>
+            </div>
+
+            <div class="footer-social">
+                <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg"
+                        alt="GitHub"></a>
+                <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg"
+                        alt="Telegram"></a>
+                <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
+                        alt="YouTube"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 SocialBlog. Все права защищены.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

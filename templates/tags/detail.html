@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block main %}
+    <main class="posts-page">
+        <h1 id="page-title">Все посты #{{ tag.title }}</h1>
+        <form class="filters" method="get" action="">
+            <div class="filter-group">
+                <label for="sort">Сортировать:</label>
+                <select id="sort" name="sort">
+                    <option value="new">Новые</option>
+                    <option value="popular">Популярные</option>
+                    <option value="comments">Обсуждаемые</option>
+                </select>
+            </div>
+
+            <button type="submit" class="filter-btn">Применить</button>
+        </form>
+        <!-- Список постов -->
+        <div class="posts-list">
+
+            {% for post in posts %}
+                {% include 'components/_post_card.html' %}
+            {% endfor %}
+
+        </div>
+    </main>
+{% endblock %}

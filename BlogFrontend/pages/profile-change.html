@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Редактировать профиль | SocialBlog</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <main class="auth-page">
+    <div class="auth-card">
+      <h1>Редактировать профиль</h1>
+      <form class="auth-form" method="POST" action="/profile/edit" enctype="multipart/form-data">
+        <!-- CSRF в Django -->
+        <!-- {% csrf_token %} -->
+
+        <!-- Аватар -->
+        <label for="avatar">Аватар</label>
+        <input type="file" id="avatar" name="avatar" accept="image/*">
+
+        <!-- Имя -->
+        <label for="first_name">Имя</label>
+        <input type="text" id="first_name" name="first_name" placeholder="Введите имя" value="User">
+
+        <!-- Фамилия -->
+        <label for="last_name">Фамилия</label>
+        <input type="text" id="last_name" name="last_name" placeholder="Введите фамилию" value="Example">
+
+        <!-- Username -->
+        <label for="username">Никнейм</label>
+        <input type="text" id="username" name="username" placeholder="Введите никнейм" value="user123" required>
+
+        <!-- Email -->
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="Введите email" value="user@mail.com" required>
+
+        <!-- Описание -->
+        <label for="bio">О себе</label>
+        <textarea id="bio" name="bio" placeholder="Расскажите немного о себе...">Люблю писать посты 😊</textarea>
+
+        <button type="submit" class="auth-btn">Сохранить изменения</button>
+      </form>
+
+      <div class="auth-links">
+        <a href="/profile">⬅ Назад в профиль</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

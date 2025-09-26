@@ -1,0 +1,15 @@
+<div class="comment">
+    <div class="comment-header">
+        <b>{{ comment.user.username }}</b>
+        {% if request.user == comment.user %}
+            <div class="comment-actions">
+                <button class="edit-comment-btn">✏️</button>
+                <form action="{% url 'delete_comment' comment.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-comment-btn">🗑</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+    <p>{{ comment.body }}</p>
+</div>

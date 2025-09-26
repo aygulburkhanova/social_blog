@@ -1,25 +1,23 @@
 """
-Наши моделки (ТАблицы В БД)
+Наши Модельки (Таблицы в БД)
 """
-
+from django.contrib.auth.models import User
 from django.db import models
 
 
 class TimeStampMixin(models.Model):
     """
-    Абстрактный класс миксин для добавления временных меток.
+    Абстрактный Класс Миксин для добавление полей с времени шкалами
 
     Attributes:
-        created_at (model.DateTimeField): Дата создания
-        updated_at (model.DateTimeField): Дата обновления
+        created_at (models.DateTimeField): Дата Создания Поста
+        updated_at (models.DateTimeField): Дата Обновление Поста
     """
-
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        abstract = True # Чтобы сделать наш класс абстактным
-
+        abstract = True  # Чтобы сделать наш класс абстрактным
 
 
 

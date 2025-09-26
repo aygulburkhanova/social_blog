@@ -1,10 +1,63 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Social Blog</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
 
+<body>
+    {% include 'components/_header.html' %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}" >
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+
+
+    {% block main %}
+    {% endblock %}
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="logo">SocialBlog</div>
+                <p>Место для идей и общения.</p>
+            </div>
+
+            <div class="footer-menu">
+                <a href="/">Посты</a>
+                <a href="/collections">Коллекции</a>
+                <a href="/create">Создать</a>
+                <a href="/about">О проекте</a>
+            </div>
+
+            <div class="footer-social">
+                <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg"
+                        alt="GitHub"></a>
+                <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg"
+                        alt="Telegram"></a>
+                <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
+                        alt="YouTube"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 SocialBlog. Все права защищены.
+        </div>
+    </footer>
+
+    {% block scripts %}
+
+    {% endblock %}
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
+
 </html>

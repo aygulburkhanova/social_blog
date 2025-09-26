@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block main %}
 
-</body>
-</html>
+  <main class="profile-page">
+    <!-- Инфо о пользователе -->
+    <section class="profile-header">
+      {% if profile.profile.avatar %}
+        <img src="{{ profile.profile.avatar.url }}" alt="" class="profile-avatar">
+      {% else %}
+        <img src="https://cdn-icons-png.flaticon.com/512/4054/4054617.png" class="profile-avatar">
+      {% endif %}
+     
+      <div class="profile-info">
+        <h1>{{ profile.username }}</h1>
+        <h4>{{ profile.first_name }} {{ profile.last_name }}</h4>
+        <p class="bio">{{ profile.profile.bio }}</p>
+        <div class="profile-stats">
+          <span><b>{{ profile.posts.count }}</b> постов</span>
+          <span><b>{{ profile.followers.count }}</b> подписчиков</span>
+          <span><b>{{ profile.followees.count }}</b> подписок</span>
+        </div>
+        {% if user != profile %}
+           <button class="follow-btn">➕ Подписаться</button>
+       
+        <!-- Кнопка для чужого профиля -->
+        {% else %}
+        <!-- Если это свой профиль -->
+            <a href="{% url "settings" %}" class="edit-profile-btn">✏️ Редактировать профиль</a> 
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- Посты пользователя -->
+    <section class="user-posts">
+      <h2>Посты</h2>
+      <div class="posts-grid">
+        {% for post in user.posts.all %}
+            {% include "components/_post_card.html" %}
+        {% endfor %}
+
+
+
+
+      </div>
+    </section>
+  </main>
+
+{% endblock main %}

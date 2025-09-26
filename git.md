@@ -1,56 +1,24 @@
-Клонирование проэкта с github  
-
+Клонирование Проекта с Гитхаба
 ```commandline
-git clone <сылка на репезитории>
+git clone <ссылка на репозиторий>
 ```
 Добавление файлов в наш коммит
 ```commandline
-git add . 
+git add .
 ```
-
-Отмена добавления 
+Отмена Добавление
 ```commandline
-git reset 
+git reset .
 ```
-Проверка статуса
+Проверка Статуса
 ```commandline
-git status 
+git status
 ```
-Создание комита с его название 
+Создание Коммита с его названием
 ```commandline
 git commit -m "Название"
 ```
-Сохрание нашего комита в репозитории 
-
+Сохранения нашего коммита в репозитории
 ```commandline
 git push
-```
-
-
-
-
-
-Инициализируем Git в вашем проекте
-```commandline
-    git init
-```
-Подключим удалённый репозиторий
-```commandline
-    git remote add origin https://github.com/aygulburkhanova/social_blog.git
-```
-
-Теперь можно добавить файлы
-```commandline
-
-git add .
-```
-Создадим коммит
-```commandline
-git commit -m "Мой первый коммит с homework2"
-```
-
-Шаги для переименования ветки master в main локально:
-```commandline
-git branch -m master main
-
 ```

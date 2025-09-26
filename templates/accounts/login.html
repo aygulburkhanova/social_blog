@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block main %}
+    <main class="auth-page">
+        <div class="auth-card">
+            <h1>Войти</h1>
+            <form class="auth-form" method="post">
+                {% csrf_token %}
+                <label for="username">Имя пользователя</label>
+                {{ form.username }}
+
+                <label for="password">Пароль</label>
+                {{ form.password }}
+
+                <button type="submit" class="auth-btn">Войти</button>
+            </form>
+
+            <div class="auth-links">
+                <a href="{% url 'register' %}">Регистрация</a>
+                <a href="/reset-password">Забыли пароль?</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

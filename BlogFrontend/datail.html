@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block main %}
+   <main class="post-page">
+        <article class="post">
+
+    <h1 class="post-title">{{ posts.title }}</h1>
+    <div class="post-meta">
+        <span>Автор: <b>{{ posts.user.username }}</b></span>
+        <span>  {{ posts.published_at|date:"d E Y" }}</span>
+    </div>
+    <div class="post-tags">
+        {% for tag in posts.tags.all %}
+            <a href="#">#{{ tag.name }}</a>
+        {% endfor %}
+    </div>
+
+    <div class="post-gallery">
+        <div class="main-image">
+            <img src="https://picsum.photos/800/400?random=1" alt="">
+        </div>
+        <div class="thumbnails">
+            <img src="https://picsum.photos/200/100?random=1" alt="">
+            <img src="https://picsum.photos/200/100?random=2" alt="">
+            <img src="https://picsum.photos/200/100?random=3" alt="">
+            <img src="https://picsum.photos/200/100?random=4" alt="">
+        </div>
+    </div>
+
+    <div class="post-content">
+        <p>{{ posts.description }}</p>
+    </div>
+
+     <div class="post-reactions">
+        <button class="like-btn">❤️ {{ posts.get_likes_count }}</button>
+        <button class="dislike-btn">👎 {{ posts.get_dislikes_count }}</button>
+    </div>
+
+
+    <!-- 🔹 Кнопки для действий с постом -->
+    <div class="post-actions">
+        <button class="add-collection-btn">➕ Добавить в коллекцию</button>
+        <button class="edit-post-btn">✏️ Редактировать</button>
+        <button class="delete-post-btn">🗑 Удалить</button>
+    </div>
+</article>
+
+<!-- Комментарии -->
+<section class="comments">
+    <h2>Комментарии</h2>
+
+    <div class="comment">
+        <div class="comment-header">
+            <b>User456</b>
+            <div class="comment-actions">
+                <button class="edit-comment-btn">✏️</button>
+                <button class="delete-comment-btn">🗑</button>
+            </div>
+        </div>
+        <p>Круто! Жду новых постов 🙌</p>
+    </div>
+
+    <div class="comment">
+        <div class="comment-header">
+            <b>User789</b>
+            <div class="comment-actions">
+                <button class="edit-comment-btn">✏️</button>
+                <button class="delete-comment-btn">🗑</button>
+            </div>
+        </div>
+        <p>А сделаешь потом на React?</p>
+    </div>
+
+    <form class="comment-form">
+        <textarea placeholder="Напишите комментарий..." required></textarea>
+        <button type="submit">Отправить</button>
+    </form>
+</section>
+
+    </main>
+{% endblock main %}
+
